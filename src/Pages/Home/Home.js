@@ -1,7 +1,7 @@
 import React from "react";
-import Blogs from "../../Components/Constant/Blogs/Blogs";
-import Header from "../../Components/Constant/Header/Header";
-import Services from "../../Components/Constant/Services/Services";
+import Blogs from "../../components/Constant/Blogs/Blogs";
+import Header from "../../components/Constant/Header/Header";
+import Services from "../../components/Constant/Services/Services";
 
 const Home = () => {
     return (

@@ -14,8 +14,8 @@ const Blogs = () => {
                         <div
                             className="blogs__item"
                             key={index}
-                            data-aos="flip-left"
-                            data-aos-duration="1500"
+                            data-aos="zoom-in"
+                            data-aos-duration="1000"
                         >
                             <div className="blogs__item-cover">
                                 <img src={blog.cover} alt="blog cover" />

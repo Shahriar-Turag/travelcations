@@ -1,23 +1,41 @@
-import { Route, Routes } from "react-router-dom";
-import "./App.css";
-import Footer from "./Components/Shared/Footer/Footer";
-import Navbar from "./Components/Shared/Navbar/Navbar";
-import AccountPage from "./Pages/AccountPage/AccountPage";
-import BlogPage from "./Pages/BlogPage/BlogPage";
-import Home from "./Pages/Home/Home";
+import React from "react";
+import { Routes, Route, Navigate } from "react-router";
+import Package from "./components/Constant/Package/Package";
+import Footer from "./components/Shared/Footer/Footer";
+import Navbar from "./components/Shared/Navbar/Navbar";
+import PrivateRoute from "./components/Shared/PrivateRoute/PrivateRoute";
+import AccountPage from "./pages/AccountPage/AccountPage";
+import BlogPage from "./pages/BlogPage/BlogPage";
+import Home from "./pages/Home/Home";
+import useAuth from "./hooks/useAuth";
+import Spinner from "./components/Shared/Spinner/Spinner";
 
-function App() {
+const App = () => {
+    const { user } = useAuth();
+
     return (
         <>
             <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/account" element={<AccountPage />} />
+                {user ? (
+                    <Route path="/account" element={<Navigate to="/" />} />
+                ) : (
+                    <Route path="/account" element={<AccountPage />} />
+                )}
                 <Route path="/blogs" element={<BlogPage />} />
+                <Route
+                    path="/package/:id"
+                    element={
+                        <PrivateRoute>
+                            <Package />
+                        </PrivateRoute>
+                    }
+                />
             </Routes>
             <Footer />
         </>
     );
-}
+};
 
 export default App;
