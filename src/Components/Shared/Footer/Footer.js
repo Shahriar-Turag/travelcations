@@ -15,25 +15,13 @@ const Footer = () => {
                             sights, meet new people, and experience different
                             cultures
                         </p>
-                        <a
-                            href="https://www.linkedin.com/company/enginix-tech/"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
+                        <a href="/" target="_blank" rel="noopener noreferrer">
                             <i className="fa-brands fa-linkedin"></i>
                         </a>
-                        <a
-                            href="https://www.facebook.com/enginix.tech"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
+                        <a href="/" target="_blank" rel="noopener noreferrer">
                             <i className="fa-brands fa-facebook-square"></i>
                         </a>
-                        <a
-                            href="https://www.facebook.com/enginix.tech"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
+                        <a href="/" target="_blank" rel="noopener noreferrer">
                             <i className="fa-brands fa-instagram-square"></i>
                         </a>
                     </div>
@@ -56,7 +44,7 @@ const Footer = () => {
                     Copyright &copy; {date.getFullYear()} . All rights reserved
                     to{" "}
                     <a href="/" target="_blank">
-                        Tour Guide
+                        Travelcations
                     </a>
                     .
                 </div>

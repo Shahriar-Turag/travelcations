@@ -1,12 +1,20 @@
 import React, { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
 import "./Account.css";
 
 const Account = () => {
+    const [resetPass, setResetPass] = useState(false);
     const [register, setRegister] = useState(false);
-    const { googleLogin, registerNewUser, loginEmailPass, error, setError } =
-        useAuth();
+    const {
+        googleLogin,
+        registerNewUser,
+        loginEmailPass,
+        resetPassword,
+        error,
+        setError,
+    } = useAuth();
 
     const location = useLocation();
     const navigate = useNavigate();
@@ -56,12 +64,21 @@ const Account = () => {
         });
     };
 
+    const handleResetPassword = () => {
+        resetPassword(email.current.value).then(() => {
+            toast.success("Check your email.");
+            setResetPass(false);
+        });
+    };
+
     return (
         <div className="account">
             <div className="account__container">
                 <div className="account__header">
                     <h1 className="account__title">
-                        {register ? (
+                        {resetPass ? (
+                            "Reset Password"
+                        ) : register ? (
                             <>
                                 Create <span>New</span> Account
                             </>
@@ -76,11 +93,15 @@ const Account = () => {
                 <form
                     onSubmit={(e) => {
                         e.preventDefault();
-                        register ? handleRegister() : handleLogin();
+                        resetPass
+                            ? handleResetPassword()
+                            : register
+                            ? handleRegister()
+                            : handleLogin();
                     }}
                     className="account__form"
                 >
-                    {register && (
+                    {!resetPass && register && (
                         <div className="account__input-group">
                             <i className="fa-solid fa-user"></i>
                             <input
@@ -101,18 +122,20 @@ const Account = () => {
                             required
                         />
                     </div>
-                    <div className="account__input-group">
-                        <i className="fa-solid fa-lock"></i>
-                        <input
-                            ref={pass}
-                            type="password"
-                            placeholder="Your Password"
-                            autoComplete="true"
-                            required
-                        />
-                    </div>
+                    {!resetPass && (
+                        <div className="account__input-group">
+                            <i className="fa-solid fa-lock"></i>
+                            <input
+                                ref={pass}
+                                type="password"
+                                placeholder="Your Password"
+                                autoComplete="true"
+                                required
+                            />
+                        </div>
+                    )}
 
-                    {register && (
+                    {!resetPass && register && (
                         <div className="account__input-group">
                             <i className="fa-solid fa-lock"></i>
                             <input
@@ -132,33 +155,70 @@ const Account = () => {
                     )}
 
                     <button className="btn-login" type="submit">
-                        {register ? "Sign Up" : "Login"}
+                        {resetPass
+                            ? "Reset Password"
+                            : register
+                            ? "Sign Up"
+                            : "Login"}
                     </button>
                 </form>
 
-                <p>Or</p>
+                {!resetPass && (
+                    <>
+                        <p>Or</p>
 
-                <button className="btn-google" onClick={handleGoogle}>
-                    <img src="/google.png" className="w-7" alt="" />
-                    <span>Google</span>
-                </button>
+                        <button className="btn-google" onClick={handleGoogle}>
+                            <img src="/google.png" className="w-7" alt="" />
+                            <span>Google</span>
+                        </button>
+                    </>
+                )}
 
                 <div className="create__account">
-                    <p>
-                        {register
-                            ? "Already have an account? "
-                            : "Don't have an account? "}
-                        <button
-                            onClick={() => {
-                                setError("");
-                                setRegister(!register);
-                            }}
-                        >
-                            {register ? "Log In" : "Sign Up"}
-                        </button>
-                    </p>
+                    {resetPass ? (
+                        <>
+                            <p>
+                                <button
+                                    onClick={() => {
+                                        setError("");
+                                        setResetPass(!resetPass);
+                                        setRegister(false);
+                                    }}
+                                >
+                                    Back To Login
+                                </button>
+                            </p>
+                        </>
+                    ) : (
+                        <>
+                            <p>
+                                {register
+                                    ? "Already have an account? "
+                                    : "Don't have an account? "}
+                                <button
+                                    onClick={() => {
+                                        setError("");
+                                        setRegister(!register);
+                                    }}
+                                >
+                                    {register ? "Log In" : "Sign Up"}
+                                </button>
+                            </p>
+                            <p>
+                                <button
+                                    onClick={() => {
+                                        setError("");
+                                        setResetPass(!resetPass);
+                                    }}
+                                >
+                                    {resetPass ? "" : "Forgot Password?"}
+                                </button>
+                            </p>
+                        </>
+                    )}
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 };

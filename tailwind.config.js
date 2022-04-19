@@ -5,6 +5,11 @@ module.exports = {
         fontFamily: {
             iceland: "Iceland",
         },
+        screens: {
+            mobile: {
+                max: "480px",
+            },
+        },
     },
     plugins: [],
 };

@@ -19,7 +19,7 @@ const Services = () => {
 
     return (
         <section className="services">
-            <h1 data-aos="fade-up" data-aos-duration="1000">
+            <h1 data-aos="fade-right" data-aos-duration="1000">
                 Packages
             </h1>
 
