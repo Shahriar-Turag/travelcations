@@ -44,7 +44,7 @@ const Footer = () => {
                     Copyright &copy; {date.getFullYear()} . All rights reserved
                     to{" "}
                     <a href="/" target="_blank">
-                        Travelcations
+                        Tour Guide
                     </a>
                     .
                 </div>
